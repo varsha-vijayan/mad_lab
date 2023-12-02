@@ -1,0 +1,194 @@
+Simple Calculator
+                                        MainActivity.java
+
+package com.example.app2;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText n1, n2;
+    TextView res;
+    Button add, sub, multi, div;
+    double num1, num2, sum, subtract, product, quotient;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        n1 = findViewById(R.id.no1);
+        n2 = findViewById(R.id.no2);
+        res = findViewById(R.id.result);
+        add = findViewById(R.id.add);
+        sub = findViewById(R.id.sub);
+        multi = findViewById(R.id.mult);
+        div = findViewById(R.id.div);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performOperation('+');
+            }
+        });
+
+        sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performOperation('-');
+            }
+        });
+
+        multi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performOperation('*');
+            }
+        });
+
+        div.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performOperation('/');
+            }
+        });
+    }
+
+    private void performOperation(char operation) {
+        num1 = Double.parseDouble(n1.getText().toString());
+        num2 = Double.parseDouble(n2.getText().toString());
+
+        switch (operation) {
+            case '+':
+                sum = num1 + num2;
+                res.setText(Double.toString(sum));
+                break;
+            case '-':
+                subtract = num1 - num2;
+                res.setText(Double.toString(subtract));
+                break;
+            case '*':
+                product = num1 * num2;
+                res.setText(Double.toString(product));
+                break;
+            case '/':
+                if (num2 != 0) {
+                    quotient = num1 / num2;
+                    res.setText(Double.toString(quotient));
+                } else {
+                    res.setText("Cannot divide by zero");
+                }
+                break;
+        }
+    }
+}
+
+
+
+                      activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculator"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="43dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter no1"
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+    <EditText
+        android:id="@+id/no1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="154dp"
+        tools:layout_editor_absoluteY="91dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter no2"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="165dp" />
+
+    <EditText
+        android:id="@+id/no2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="154dp"
+        tools:layout_editor_absoluteY="149dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="99dp"
+        android:layout_height="29dp"
+        android:text="Result:"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="161dp"
+        android:layout_height="26dp"
+        android:text=""
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        tools:layout_editor_absoluteX="116dp"
+        tools:layout_editor_absoluteY="244dp" />
+
+    <Button
+        android:id="@+id/sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        tools:layout_editor_absoluteX="261dp"
+        tools:layout_editor_absoluteY="244dp" />
+
+    <Button
+        android:id="@+id/mult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*"
+        tools:layout_editor_absoluteX="119dp"
+        tools:layout_editor_absoluteY="323dp" />
+
+    <Button
+        android:id="@+id/div"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        tools:layout_editor_absoluteX="261dp"
+        tools:layout_editor_absoluteY="323dp" />
+</LinearLayout>
